@@ -22,7 +22,8 @@ def call_gemini(prompt):
         response = chat.send_message(
             message = prompt
         )
-        text = remove_trailers(response.text) if "```" in response.text else response.text.strip()
+        text = response.text.strip()
+        print("Gemini response: ",text)
 
         try:
             return text
@@ -32,11 +33,4 @@ def call_gemini(prompt):
         print(f"An error occurred: {e}", "error")
         return None
     
-def remove_trailers(text):
-    if '```' in text or 'json' in text:
-        text = text.replace('```', "")
-        text = text.replace('json', "")
-        text = text.replace('python', "")
-        return text.strip()
-    return text
     
